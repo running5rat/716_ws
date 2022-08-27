@@ -1,0 +1,67 @@
+# This file is part of VROOM.
+#
+# Copyright (c) 2015-2021, Julien Coupey.
+# All rights reserved (see LICENSE).
+
+# Variables.
+CXX ?= g++
+CXXFLAGS = -MMD -MP -I. -std=c++17 -Wextra -Wpedantic -Wall -O3 -DASIO_STANDALONE -DNDEBUG
+LDLIBS = -lpthread # -lssl -lcrypto
+
+# Using all cpp files in current directory.
+LIB = ../lib/libvroom.a
+SRC = $(wildcard *.cpp)\
+			$(wildcard ./algorithms/*.cpp)\
+			$(wildcard ./algorithms/*/*.cpp)\
+			$(wildcard ./routing/*.cpp)\
+			$(wildcard ./problems/*.cpp)\
+			$(wildcard ./problems/*/*.cpp)\
+			$(wildcard ./problems/*/*/*.cpp)\
+			$(wildcard ./structures/generic/*.cpp)\
+			$(wildcard ./structures/vroom/*.cpp)\
+			$(wildcard ./structures/vroom/input/*.cpp)\
+			$(wildcard ./structures/vroom/solution/*.cpp)\
+			$(wildcard ./structures/*.cpp)\
+			$(wildcard ./utils/*.cpp)
+
+# Checking for libosrm
+# ifeq ($(shell pkg-config --exists libosrm && echo 1),1)
+# 	LDLIBS += $(shell pkg-config --libs libosrm) -lboost_system -lboost_filesystem -lboost_iostreams -lboost_thread -lrt -ltbb
+# 	LIBOSRMFLAGS = $(shell pkg-config --cflags libosrm)
+# 	CXXFLAGS += $(filter-out -std=c++14, $(LIBOSRMFLAGS)) -D USE_LIBOSRM=true
+# else
+# 	SRC := $(filter-out ./routing/libosrm_wrapper.cpp, $(SRC))
+# endif
+
+# Checking for libglpk based on whether the header file is found as
+# glpk does not provide a pkg-config setup.
+GLPK_HEADER := $(strip $(wildcard /usr/include/glpk.h))
+ifeq ($(GLPK_HEADER),)
+	SRC := $(filter-out ./algorithms/validation/check.cpp, $(SRC))
+	SRC := $(filter-out ./algorithms/validation/choose_ETA.cpp, $(SRC))
+	CXXFLAGS += -D USE_LIBGLPK=false
+else
+	LDLIBS += -lglpk
+	CXXFLAGS += -D USE_LIBGLPK=true
+endif
+
+OBJ = $(SRC:.cpp=.o)
+DEPS = $(SRC:.cpp=.d)
+
+# Main target.
+all : $(MAIN) $(LIB)
+
+
+$(LIB) : $(OBJ)
+	mkdir -p $(@D)
+	$(AR) cr $@ $^
+
+# Building .o files.
+%.o : %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+-include ${DEPS}
+
+clean :
+	$(RM) $(OBJ) $(DEPS)
+	$(RM) $(LIB)

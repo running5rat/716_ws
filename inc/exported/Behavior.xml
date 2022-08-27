@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--EXPORTED BY TOOL, DON'T MODIFY IT!-->
+<!--Source File: Behavior.xml-->
+<behavior name="Behavior" agenttype="behaviac::Agent" version="5">
+  <node class="Sequence" id="67">
+    <node class="Action" id="5">
+      <property Method="blackboard.blackboard::LogicInit()" />
+      <property ResultOption="BT_SUCCESS" />
+    </node>
+    <node class="DecoratorLoopUntil" id="2">
+      <property Count="const int -1" />
+      <property DecorateWhenChildEnds="true" />
+      <property Until="true" />
+      <node class="Parallel" id="65">
+        <property ChildFinishPolicy="CHILDFINISH_LOOP" />
+        <property ExitPolicy="EXIT_ABORT_RUNNINGSIBLINGS" />
+        <property FailurePolicy="FAIL_ON_ONE" />
+        <property SuccessPolicy="SUCCEED_ON_ALL" />
+        <node class="Sequence" id="18">
+          <node class="Action" id="50">
+            <property Method="Coverage.Coverage::SetGroup()" />
+            <property ResultOption="BT_SUCCESS" />
+          </node>
+          <node class="Action" id="70">
+            <property Method="Coverage.Coverage::DevideArea()" />
+            <property ResultOption="BT_SUCCESS" />
+          </node>
+          <node class="Action" id="71">
+            <property Method="Coverage.Coverage::FindCoveragePath()" />
+            <property ResultOption="BT_SUCCESS" />
+          </node>
+          <node class="DecoratorLoopUntil" id="1">
+            <property Count="const int -1" />
+            <property DecorateWhenChildEnds="true" />
+            <property Until="true" />
+            <node class="Sequence" id="66">
+              <node class="DecoratorAlwaysSuccess" id="15">
+                <property DecorateWhenChildEnds="true" />
+                <node class="Sequence" id="17">
+                  <node class="Condition" id="16">
+                    <property Operator="Equal" />
+                    <property Opl="bool blackboard.blackboard::ManualCommand" />
+                    <property Opr="const bool true" />
+                  </node>
+                  <node class="ReferencedBehavior" id="63">
+                    <property ReferenceBehavior="const string &quot;Interact&quot;" />
+                  </node>
+                </node>
+              </node>
+              <node class="DecoratorAlwaysSuccess" id="22">
+                <property DecorateWhenChildEnds="true" />
+                <node class="Sequence" id="8">
+                  <node class="Condition" id="9">
+                    <property Operator="Equal" />
+                    <property Opl="bool Coverage.Process::Replan" />
+                    <property Opr="const bool true" />
+                  </node>
+                  <node class="Action" id="69">
+                    <property Method="Coverage.Coverage::SetGroup()" />
+                    <property ResultOption="BT_SUCCESS" />
+                  </node>
+                  <node class="Action" id="10">
+                    <property Method="Coverage.Coverage::DevideArea()" />
+                    <property ResultOption="BT_SUCCESS" />
+                  </node>
+                  <node class="Action" id="14">
+                    <property Method="Coverage.Coverage::FindCoveragePath()" />
+                    <property ResultOption="BT_SUCCESS" />
+                  </node>
+                  <node class="Assignment" id="3">
+                    <property CastRight="false" />
+                    <property Opl="bool Coverage.Process::Replan" />
+                    <property Opr="const bool false" />
+                  </node>
+                </node>
+              </node>
+              <node class="DecoratorAlwaysSuccess" id="49">
+                <property DecorateWhenChildEnds="true" />
+                <node class="Sequence" id="31">
+                  <node class="Condition" id="40">
+                    <property Operator="Equal" />
+                    <property Opl="bool blackboard.blackboard::NewTarget" />
+                    <property Opr="const bool true" />
+                  </node>
+                  <node class="Action" id="25">
+                    <property Method="Recognize.Recognize::ApproachAndRecognize()" />
+                    <property ResultOption="BT_SUCCESS" />
+                  </node>
+                  <node class="Selector" id="0">
+                    <node class="Sequence" id="41">
+                      <node class="Condition" id="42">
+                        <property Operator="Equal" />
+                        <property Opl="int blackboard.blackboard::TargetsFound" />
+                        <property Opr="int blackboard.blackboard::TotalTargets" />
+                      </node>
+                      <node class="Assignment" id="43">
+                        <property CastRight="false" />
+                        <property Opl="bool Revisit.Revisit::IgnoreBlindSpot" />
+                        <property Opr="const bool true" />
+                      </node>
+                      <node class="Assignment" id="64">
+                        <property CastRight="false" />
+                        <property Opl="bool Revisit.Process::Replan" />
+                        <property Opr="const bool true" />
+                      </node>
+                    </node>
+                    <node class="Assignment" id="7">
+                      <property CastRight="false" />
+                      <property Opl="bool Revisit.Revisit::IgnoreBlindSpot" />
+                      <property Opr="const bool false" />
+                    </node>
+                  </node>
+                  <node class="Assignment" id="44">
+                    <property CastRight="false" />
+                    <property Opl="bool blackboard.blackboard::NewTarget" />
+                    <property Opr="const bool false" />
+                  </node>
+                </node>
+              </node>
+              <node class="Condition" id="47">
+                <property Operator="Equal" />
+                <property Opl="Coverage.Process::VehicleVectorEmpty()" />
+                <property Opr="const bool true" />
+              </node>
+            </node>
+          </node>
+        </node>
+        <node class="Sequence" id="24">
+          <node class="Action" id="26">
+            <property Method="Revisit.Revisit::AskForBlindSpot()" />
+            <property ResultOption="BT_SUCCESS" />
+          </node>
+          <node class="Action" id="76">
+            <property Method="Revisit.Revisit::FindRevisitOrder()" />
+            <property ResultOption="BT_SUCCESS" />
+          </node>
+          <node class="Action" id="77">
+            <property Method="Revisit.Revisit::FindRevisitPath()" />
+            <property ResultOption="BT_SUCCESS" />
+          </node>
+          <node class="DecoratorLoopUntil" id="28">
+            <property Count="const int -1" />
+            <property DecorateWhenChildEnds="true" />
+            <property Until="true" />
+            <node class="Sequence" id="39">
+              <node class="DecoratorAlwaysSuccess" id="21">
+                <property DecorateWhenChildEnds="true" />
+                <node class="Sequence" id="30">
+                  <node class="Condition" id="51">
+                    <property Operator="Equal" />
+                    <property Opl="bool blackboard.blackboard::ManualCommand" />
+                    <property Opr="const bool true" />
+                  </node>
+                  <node class="ReferencedBehavior" id="56">
+                    <property ReferenceBehavior="const string &quot;Interact&quot;" />
+                  </node>
+                </node>
+              </node>
+              <node class="DecoratorAlwaysSuccess" id="29">
+                <property DecorateWhenChildEnds="true" />
+                <node class="Sequence" id="54">
+                  <node class="Condition" id="55">
+                    <property Operator="Equal" />
+                    <property Opl="bool blackboard.blackboard::NewTarget" />
+                    <property Opr="const bool true" />
+                  </node>
+                  <node class="Action" id="48">
+                    <property Method="Recognize.Recognize::ApproachAndRecognize()" />
+                    <property ResultOption="BT_SUCCESS" />
+                  </node>
+                  <node class="Selector" id="57">
+                    <node class="Sequence" id="58">
+                      <node class="Condition" id="59">
+                        <property Operator="Equal" />
+                        <property Opl="int blackboard.blackboard::TargetsFound" />
+                        <property Opr="int blackboard.blackboard::TotalTargets" />
+                      </node>
+                      <node class="Assignment" id="60">
+                        <property CastRight="false" />
+                        <property Opl="bool Revisit.Revisit::IgnoreBlindSpot" />
+                        <property Opr="const bool true" />
+                      </node>
+                      <node class="Assignment" id="68">
+                        <property CastRight="false" />
+                        <property Opl="bool Revisit.Process::Replan" />
+                        <property Opr="const bool true" />
+                      </node>
+                    </node>
+                    <node class="Assignment" id="61">
+                      <property CastRight="false" />
+                      <property Opl="bool Revisit.Revisit::IgnoreBlindSpot" />
+                      <property Opr="const bool false" />
+                    </node>
+                  </node>
+                  <node class="Assignment" id="62">
+                    <property CastRight="false" />
+                    <property Opl="bool blackboard.blackboard::NewTarget" />
+                    <property Opr="const bool false" />
+                  </node>
+                </node>
+              </node>
+              <node class="DecoratorAlwaysSuccess" id="53">
+                <property DecorateWhenChildEnds="true" />
+                <node class="Sequence" id="35">
+                  <node class="Condition" id="36">
+                    <property Operator="Equal" />
+                    <property Opl="bool Revisit.Process::Replan" />
+                    <property Opr="const bool true" />
+                  </node>
+                  <node class="Action" id="23">
+                    <property Method="Revisit.Revisit::AskForBlindSpot()" />
+                    <property ResultOption="BT_SUCCESS" />
+                  </node>
+                  <node class="Action" id="37">
+                    <property Method="Revisit.Revisit::FindRevisitOrder()" />
+                    <property ResultOption="BT_SUCCESS" />
+                  </node>
+                  <node class="Action" id="38">
+                    <property Method="Revisit.Revisit::FindRevisitPath()" />
+                    <property ResultOption="BT_SUCCESS" />
+                  </node>
+                  <node class="Assignment" id="13">
+                    <property CastRight="false" />
+                    <property Opl="bool Revisit.Process::Replan" />
+                    <property Opr="const bool false" />
+                  </node>
+                </node>
+              </node>
+              <node class="Condition" id="11">
+                <property Operator="Equal" />
+                <property Opl="Revisit.Process::VehicleVectorEmpty()" />
+                <property Opr="const bool true" />
+              </node>
+            </node>
+          </node>
+        </node>
+      </node>
+    </node>
+  </node>
+</behavior>

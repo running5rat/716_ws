@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--EXPORTED BY TOOL, DON'T MODIFY IT!-->
+<!--Source File: Recognize.xml-->
+<behavior name="Recognize" agenttype="Recognize" version="5">
+  <node class="Sequence" id="0">
+    <node class="Action" id="11">
+      <property Method="Recognize.Recognize::Initialize()" />
+      <property ResultOption="BT_SUCCESS" />
+    </node>
+    <node class="Action" id="1">
+      <property Method="Recognize.Recognize::ApproachAndRecognize()" />
+      <property ResultOption="BT_SUCCESS" />
+    </node>
+    <node class="Selector" id="12">
+      <node class="Sequence" id="2">
+        <node class="Condition" id="3">
+          <property Operator="Equal" />
+          <property Opl="bool Recognize.Recognize::CanBeRecognized" />
+          <property Opr="const bool true" />
+        </node>
+        <node class="Selector" id="13">
+          <node class="Sequence" id="8">
+            <node class="Condition" id="6">
+              <property Operator="Equal" />
+              <property Opl="bool Recognize.Recognize::NeedEliminated" />
+              <property Opr="const bool true" />
+            </node>
+            <node class="Selector" id="15">
+              <node class="Sequence" id="7">
+                <node class="Condition" id="5">
+                  <property Operator="Equal" />
+                  <property Opl="bool Recognize.Recognize::TargetAhead" />
+                  <property Opr="const bool true" />
+                </node>
+                <node class="Action" id="10">
+                  <property Method="Recognize.Recognize::Eliminate()" />
+                  <property ResultOption="BT_SUCCESS" />
+                </node>
+              </node>
+              <node class="Action" id="4">
+                <property Method="Recognize.Recognize::AddToEliminate()" />
+                <property ResultOption="BT_SUCCESS" />
+              </node>
+            </node>
+          </node>
+          <node class="Noop" id="14" />
+        </node>
+      </node>
+      <node class="Action" id="9">
+        <property Method="Recognize.Recognize::AddToRevisit()" />
+        <property ResultOption="BT_SUCCESS" />
+      </node>
+    </node>
+  </node>
+</behavior>

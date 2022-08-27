@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--EXPORTED BY TOOL, DON'T MODIFY IT!-->
+<agents version="1" signature="3989776673">
+  <agent type="blackboard" base="behaviac::Agent" signature="463107915">
+    <properties>
+      <property name="ManualCommand" type="bool" member="false" static="false" defaultvalue="false" />
+      <property name="NewTarget" type="bool" member="false" static="false" defaultvalue="false" />
+      <property name="TargetsFound" type="int" member="false" static="false" defaultvalue="0" />
+      <property name="TotalTargets" type="int" member="false" static="false" defaultvalue="0" />
+    </properties>
+  </agent>
+  <agent type="Process" base="behaviac::Agent" signature="2162825115">
+    <properties>
+      <property name="Finnished" type="bool" member="false" static="false" defaultvalue="false" />
+      <property name="Init" type="bool" member="false" static="false" defaultvalue="false" />
+      <property name="Replan" type="bool" member="false" static="false" defaultvalue="false" />
+      <property name="VehicleID" type="vector&lt;int&gt;" member="false" static="false" defaultvalue="0:" />
+    </properties>
+  </agent>
+  <agent type="Coverage" base="Process" signature="194611947">
+    <properties>
+      <property name="Finnished" type="bool" member="false" static="false" defaultvalue="false" />
+      <property name="Init" type="bool" member="false" static="false" defaultvalue="false" />
+      <property name="Replan" type="bool" member="false" static="false" defaultvalue="false" />
+      <property name="VehicleID" type="vector&lt;int&gt;" member="false" static="false" defaultvalue="0:" />
+    </properties>
+  </agent>
+  <agent type="Revisit" base="Process" signature="2037897485">
+    <properties>
+      <property name="Finnished" type="bool" member="false" static="false" defaultvalue="false" />
+      <property name="IgnoreBlindSpot" type="bool" member="false" static="false" defaultvalue="false" />
+      <property name="Init" type="bool" member="false" static="false" defaultvalue="false" />
+      <property name="Replan" type="bool" member="false" static="false" defaultvalue="false" />
+      <property name="VehicleID" type="vector&lt;int&gt;" member="false" static="false" defaultvalue="0:" />
+    </properties>
+  </agent>
+  <agent type="Recognize" base="behaviac::Agent" signature="1980793486">
+    <properties>
+      <property name="AmmunitionAvaiable" type="bool" member="false" static="false" defaultvalue="false" />
+      <property name="CanBeRecognized" type="bool" member="false" static="false" defaultvalue="false" />
+      <property name="NeedEliminated" type="bool" member="false" static="false" defaultvalue="false" />
+    </properties>
+  </agent>
+  <agent type="Interact" base="behaviac::Agent" signature="2765218838">
+    <properties>
+      <property name="InteractTask" type="TaskType" member="false" static="false" defaultvalue="SetTargetType" />
+    </properties>
+  </agent>
+</agents>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--EXPORTED BY TOOL, DON'T MODIFY IT!-->
+<!--Source File: Interact.xml-->
+<behavior name="Interact" agenttype="behaviac::Agent" version="5">
+  <node class="Selector" id="0">
+    <node class="Sequence" id="4">
+      <node class="Condition" id="1">
+        <property Operator="Equal" />
+        <property Opl="TaskType Interact.Interact::InteractTask" />
+        <property Opr="const TaskType SetTargetType" />
+      </node>
+      <node class="Action" id="7">
+        <property Method="Interact.Interact::SetTargetType()" />
+        <property ResultOption="BT_SUCCESS" />
+      </node>
+    </node>
+    <node class="Sequence" id="5">
+      <node class="Condition" id="2">
+        <property Operator="Equal" />
+        <property Opl="TaskType Interact.Interact::InteractTask" />
+        <property Opr="const TaskType TurnBack" />
+      </node>
+      <node class="Action" id="9">
+        <property Method="Interact.Interact::TurnBack()" />
+        <property ResultOption="BT_SUCCESS" />
+      </node>
+    </node>
+    <node class="Sequence" id="6">
+      <node class="Condition" id="3">
+        <property Operator="Equal" />
+        <property Opl="TaskType Interact.Interact::InteractTask" />
+        <property Opr="const TaskType MoveTo" />
+      </node>
+      <node class="Action" id="8">
+        <property Method="Interact.Interact::MoveTo()" />
+        <property ResultOption="BT_SUCCESS" />
+      </node>
+    </node>
+  </node>
+</behavior>
